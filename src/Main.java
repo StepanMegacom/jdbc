@@ -54,8 +54,9 @@ public class Main {
                 preparedStatement.setLong(10, Long.parseLong(result.get(i)[8]));
                 preparedStatement.setLong(11, Long.parseLong(result.get(i)[9]));
 
-                preparedStatement.executeUpdate();
+                preparedStatement.addBatch();
             }
+            preparedStatement.executeBatch();
             con.commit();
 
         }catch (Exception e){
