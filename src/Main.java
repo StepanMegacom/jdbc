@@ -57,10 +57,12 @@ public class Main {
                 preparedStatement.addBatch();
             }
             preparedStatement.executeBatch();
+            System.out.println(1/0);
             con.commit();
 
         }catch (Exception e){
             e.printStackTrace();
+            con.rollback();
         }finally {
             System.out.println((System.currentTimeMillis()-l)/1000 + " seconds");
 
