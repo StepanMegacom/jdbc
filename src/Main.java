@@ -29,6 +29,7 @@ public class Main {
         Connection con = DriverManager.getConnection(
                 "jdbc:postgresql://localhost:5432/statistics2",
                 "postgres", "postgres");
+        con.setAutoCommit(false);
 
         try {
 
@@ -38,10 +39,6 @@ public class Main {
                     "values (?,?,?,?,?,?,?,?,?,?,?);");
 
             Statement statement = con.createStatement();
-
-//            ResultSet resultSet = statement.execute("select *");
-//
-//            result
 
 
             for (int i = 0; i < result.size(); i++) {
@@ -59,10 +56,12 @@ public class Main {
 
                 preparedStatement.executeUpdate();
             }
+            con.commit();
 
         }catch (Exception e){
             e.printStackTrace();
         }finally {
+            System.out.println((System.currentTimeMillis()-l)/1000 + " seconds");
 
             con.close();
         }
